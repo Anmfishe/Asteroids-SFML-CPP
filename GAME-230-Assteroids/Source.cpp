@@ -8,11 +8,13 @@ void update_state(float dt);
 void render_frame();
 void load();
 void loadAsteroids();
+void make_bullet();
 const int SCREENWIDTH = 800;
 const int SCREENHEIGHT = 800;
 int curr_asteroids;
 int num_asteroids = 2;
 
+Ship *ship;
 RenderWindow window;
 
 vector<GameObject*> SceneGraph;
@@ -29,6 +31,13 @@ int main()
 		{
 			if (event.type == sf::Event::Closed)
 				window.close();
+			if (event.type == sf::Event::MouseButtonPressed)
+			{
+				if (event.mouseButton.button == sf::Mouse::Left)
+				{
+					make_bullet();
+				}
+			}
 		}
 
 		float dt = clock.restart().asSeconds();
@@ -45,12 +54,13 @@ void update_state(float dt)
 {
 	for (auto i = SceneGraph.begin(); i != SceneGraph.end(); ++i) {
 		if ((*i)->dead()) {
+			delete (*i);
 			SceneGraph.erase(i);
-			delete *i;
 			break;
 		}
 		(*i)->update(dt, window);
 	}
+	ship->update(dt, window);
 }
 
 void render_frame()
@@ -59,10 +69,10 @@ void render_frame()
 	for (auto i = SceneGraph.begin(); i != SceneGraph.end(); ++i) {
 		(*i)->render(window);
 	}
+	ship->render(window);
 }
 void load() {
-	Ship *ship = new Ship(SCREENWIDTH, SCREENHEIGHT);
-	SceneGraph.push_back(ship);
+	ship = new Ship(SCREENWIDTH, SCREENHEIGHT);
 	curr_asteroids = num_asteroids;
 	loadAsteroids();
 }
@@ -71,4 +81,8 @@ void loadAsteroids() {
 		Asteroid *ast = new Asteroid();
 		SceneGraph.push_back(ast);
 	}
+}
+void make_bullet() {
+	Bullet *b = ship->get_bullet();
+	SceneGraph.push_back(b);
 }

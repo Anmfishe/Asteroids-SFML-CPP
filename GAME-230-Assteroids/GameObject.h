@@ -8,6 +8,7 @@
 #include <SFML/Main.hpp>
 #include <vector>
 #include <cmath>
+#include <iostream>
 using namespace sf;
 using namespace std;
 class GameObject

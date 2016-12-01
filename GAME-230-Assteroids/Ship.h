@@ -1,5 +1,5 @@
 #pragma once
-#include "GameObject.h"
+#include "Bullet.h"
 class Ship :
 	public GameObject
 {
@@ -13,6 +13,7 @@ public:
 	};
 	Ship(int sw, int sh);
 	~Ship();
+	Bullet* get_bullet();
 private:
 	void look_at_mouse(RenderWindow &w);
 	CircleShape circle;
@@ -24,5 +25,6 @@ private:
 	float accel_speed = 500;
 	float speed_cap = 300;
 	const float PI = 3.14159265;
+	float rotation;
 };
 

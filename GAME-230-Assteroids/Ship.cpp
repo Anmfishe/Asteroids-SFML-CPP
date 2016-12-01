@@ -75,17 +75,25 @@ Ship::~Ship()
 {
 }
 
+Bullet * Ship::get_bullet()
+{
+	Vector2f pos = circle.getPosition();
+	pos.x += cos(rotation) * radius;
+	pos.y += sin(rotation) * radius;
+	Bullet *b = new Bullet(rotation, pos, sw, sh);
+	return b;
+}
+
 void Ship::look_at_mouse(RenderWindow & w)
 {
 	Vector2f pos = circle.getPosition();
 	Vector2i mousePos = Mouse::getPosition(w);
 
-
 	float dx = pos.x - mousePos.x;
 	float dy = pos.y - mousePos.y;
-
-	float rotation = (atan2(dy, dx)) * 180 / PI;
-	rotation -= 90;
-
-	circle.setRotation(rotation);
+	 
+	float rot = (atan2(dy, dx));
+	rotation = rot + PI;
+	rot = rot * 180 / PI;
+	circle.setRotation(rot - 90);
 }

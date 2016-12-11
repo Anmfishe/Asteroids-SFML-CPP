@@ -11,6 +11,9 @@ public:
 	bool dead() {
 		return false;
 	};
+	Vector2f getPos() {
+		return circle.getPosition();
+	}
 	Ship(int sw, int sh);
 	~Ship();
 	Bullet* get_bullet();

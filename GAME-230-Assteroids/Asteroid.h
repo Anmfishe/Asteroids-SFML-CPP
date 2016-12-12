@@ -5,6 +5,7 @@ class Asteroid :
 {
 public:
 	void update(float dt, RenderWindow &w);
+	void hit();
 	void render(RenderWindow &w) {
 		w.draw(circle);
 	};
@@ -16,6 +17,15 @@ public:
 	}
 	float getRadius() {
 		return radius;
+	}
+	Vector2f getPos() {
+		return circle.getPosition();
+	}
+	int getType() {
+		return 1;
+	}
+	int getSize() {
+		return a_size;
 	}
 	Asteroid *getAsteroid(float angle);
 	Asteroid(int size, Vector2f pos, float a, int SW, int SH);

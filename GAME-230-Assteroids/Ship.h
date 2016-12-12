@@ -5,16 +5,23 @@ class Ship :
 {
 public:
 	void update(float dt, RenderWindow &w);
+	void hit();
 	void render(RenderWindow &w) {
 		w.draw(circle);
 	};
 	bool dead() {
 		return false;
 	};
+	float getRadius() {
+		return radius;
+	}
 	Vector2f getPos() {
 		return circle.getPosition();
 	}
-	Ship(int sw, int sh);
+	int getType() {
+		return 2;
+	}
+	Ship(int sw, int sh, int * l);
 	~Ship();
 	Bullet* get_bullet();
 private:
@@ -22,12 +29,17 @@ private:
 	CircleShape circle;
 	Vector2f vel;
 	Vector2f accel;
-	Texture tex;
+	Texture tex, f_tex;
 	float radius = 40;
 	int sw, sh;
 	float accel_speed = 500;
 	float speed_cap = 300;
 	const float PI = 3.14159265;
 	float rotation;
+	float invl_time = 3;
+	float accuml_time = 3;
+	int * lives;
+	SoundBuffer buff;
+	Sound hit_s;
 };
 

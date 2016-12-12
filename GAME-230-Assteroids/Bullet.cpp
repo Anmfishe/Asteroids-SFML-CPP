@@ -18,9 +18,14 @@ void Bullet::update(float dt, RenderWindow & w)
 	circle.setPosition(pos);
 }
 
+void Bullet::hit()
+{
+	is_dead = true;
+}
+
 Bullet::Bullet(float a, Vector2f pos, int sw, int sh)
 {
-	circle.setRadius(5);
+	circle.setRadius(radius);
 	circle.setFillColor(Color::Green);
 	circle.setPosition(pos);
 	angle = a;

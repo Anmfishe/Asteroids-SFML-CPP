@@ -14,6 +14,11 @@ void Asteroid::update(float dt, RenderWindow & w)
 	circle.setPosition(pos);
 }
 
+void Asteroid::hit()
+{
+	is_dead = true;
+}
+
 Asteroid * Asteroid::getAsteroid(float angle)
 {
 	Asteroid *ast = new Asteroid(a_size - 1, circle.getPosition(), angle, sw, sh);

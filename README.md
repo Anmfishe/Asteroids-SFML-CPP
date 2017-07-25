@@ -1,1 +1,1 @@
-# GAME-230-Assteroids
+Simple asteroids using SFML and C++
